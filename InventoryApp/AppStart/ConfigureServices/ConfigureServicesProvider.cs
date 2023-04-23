@@ -8,7 +8,9 @@ namespace InventoryApp.AppStart.ConfigureServices
         public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IUserProvider, EntityUserProvider>();
-
+            services.AddScoped<IClassroomProvider, EntityClassroomProvider>();
+            services.AddScoped<ICategoryProvider, EntityCategoryProvider>();
+            services.AddScoped<ItemProvider, EntityItemProvider>();
         }
     }
 }

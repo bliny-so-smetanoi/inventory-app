@@ -11,6 +11,7 @@ namespace InventoryApp.DataAccess
         public DbSet<Image> Images { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
@@ -29,8 +30,8 @@ namespace InventoryApp.DataAccess
                     Role = UserRole.SuperAdmin},
             });
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
-
-
+            modelBuilder.Entity<Classroom>().HasIndex(u => u.ClassroomName).IsUnique();
+            modelBuilder.Entity<Category>().HasIndex(u => u.Name).IsUnique();
            
 
         }

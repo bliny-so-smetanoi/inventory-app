@@ -9,9 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryApp.Models", "Inve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryApp.DataAccess", "InventoryApp.DataAccess\InventoryApp.DataAccess.csproj", "{A39C39F2-F1E1-445A-9FB2-1F744F029D01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryApp.Contracts", "InventoryApp.Contracts\InventoryApp.Contracts.csproj", "{DAFE2CC7-89B4-4492-93E3-7D46FDB7EF2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryApp.Contracts", "InventoryApp.Contracts\InventoryApp.Contracts.csproj", "{DAFE2CC7-89B4-4492-93E3-7D46FDB7EF2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryApp.Services", "InventoryApp.Services\InventoryApp.Services.csproj", "{73F98D50-CEE1-4AEB-856C-892EC0639E38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryApp.Services", "InventoryApp.Services\InventoryApp.Services.csproj", "{73F98D50-CEE1-4AEB-856C-892EC0639E38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EAB15A7F-8D46-4AF6-B8E1-BF98A5F1B75E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

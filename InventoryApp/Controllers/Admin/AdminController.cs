@@ -94,7 +94,7 @@ namespace InventoryApp.Controllers.Admin
                 if (moderator is not null)
                 {
                     if (!moderator.Id.Equals(admin.Id))
-                        return BadRequest("Admin with current login existed");
+                        return BadRequest("Admin with current login is existing!");
                 }
 
                 if (admin is null || admin.Role == UserRole.SuperAdmin) return NotFound();
