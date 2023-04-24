@@ -7,6 +7,7 @@ using InventoryApp.Models.Users.User;
 using InventoryApp.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Configuration;
 using System.Net;
 
 namespace InventoryApp.Controllers.Admin
@@ -17,26 +18,11 @@ namespace InventoryApp.Controllers.Admin
     public class AdminController : Controller
     {
         private readonly IUserProvider _userProvider;
-        private readonly AwsS3FileUploadService _uploadService;
 
-        public AdminController(IUserProvider userProvider, AwsS3FileUploadService uploadService) {
+        public AdminController(IUserProvider userProvider) {
             _userProvider = userProvider;
-            _uploadService = uploadService;
         }
-        [HttpPost("upload")]
-        public async Task<IActionResult> Upload(IFormFile file)
-        {
-            try
-            {
-                var result = await _uploadService.UploadFileAsync(file);
 
-                return Ok(new {fileUrl = result});
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -64,24 +50,32 @@ namespace InventoryApp.Controllers.Admin
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AdminParameter parameter)
         {
-            var user = await _userProvider.FirstOrDefault(x => x.Email == parameter.Email);
-            
-            if (user is not null)
-                return BadRequest("Admin or moderator with current email existed");
-
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(parameter.Password);
-            
-            var newUser = new User
+            try
             {
-                Email = parameter.Email,
-                FullName = parameter.FullName,
-                Role = parameter.Role,
-                Password = passwordHash
-            };
+                Console.WriteLine(parameter.Role);
+                var user = await _userProvider.FirstOrDefault(x => x.Email == parameter.Email);
 
-            await _userProvider.Add(newUser);
+                if (user is not null)
+                    return BadRequest("Admin or moderator with current email existed");
 
-            return NoContent();
+                var passwordHash = BCrypt.Net.BCrypt.HashPassword(parameter.Password);
+
+                var newUser = new User
+                {
+                    Email = parameter.Email,
+                    FullName = parameter.FullName,
+                    Role = (UserRole) Int32.Parse(parameter.Role),
+                    Password = passwordHash
+                };
+
+                await _userProvider.Add(newUser);
+
+                return Ok(new {message = "User was added!"});
+            } catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, [FromBody] AdminParameter parameter)
@@ -102,13 +96,13 @@ namespace InventoryApp.Controllers.Admin
                 var passwordHash = BCrypt.Net.BCrypt.HashPassword(parameter.Password);
 
                 admin.Email = parameter.Email;
-                admin.Role = parameter.Role;
+                admin.Role = (UserRole)Int32.Parse(parameter.Role);
                 admin.FullName = parameter.FullName;
                 admin.Password = passwordHash;
 
                 await _userProvider.Edit(admin);
 
-                return NoContent();
+                return Ok(new {message = "User was edited!"});
             }
             catch (ArgumentException e)
             {
@@ -124,7 +118,7 @@ namespace InventoryApp.Controllers.Admin
 
             await _userProvider.Remove(admin);
 
-            return NoContent();
+            return Ok(new {message = "User was deleted!"});
         }
 
 

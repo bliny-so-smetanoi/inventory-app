@@ -12,7 +12,6 @@ namespace InventoryApp.Controllers.Classrooms
 {
     [ApiExplorerSettings(GroupName = "v1-admin")]
     [Route("api/classroom/")]
-    [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin)]
     public class ClassroomController : Controller
     {
         private readonly IClassroomProvider _classroomProvider;
@@ -20,7 +19,7 @@ namespace InventoryApp.Controllers.Classrooms
         public ClassroomController(IClassroomProvider classroomProvider) {
             _classroomProvider = classroomProvider;
         }
-
+        [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ClassroomCreateParameter classroomCreate)
         {
@@ -42,7 +41,7 @@ namespace InventoryApp.Controllers.Classrooms
                 return BadRequest(new { message = "Classroom with given number/name is already added!" });
             }
         }
-
+        [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin, UserRole.Moderator)]
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -55,7 +54,7 @@ namespace InventoryApp.Controllers.Classrooms
                 return BadRequest(ex.Message);
             }
         }
-
+        [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin, UserRole.Moderator)]
         [HttpGet]
         public async Task<IActionResult> GetAllClassrooms()
         {
@@ -70,7 +69,7 @@ namespace InventoryApp.Controllers.Classrooms
                 return BadRequest(ex.Message);
             }
         }
-
+        [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin)]
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, [FromBody] ClassroomEditParameter classroomEditParameter)
         {
@@ -102,7 +101,7 @@ namespace InventoryApp.Controllers.Classrooms
                 return NotFound(ex.Message);
             }
         }
-
+        [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin)]
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {

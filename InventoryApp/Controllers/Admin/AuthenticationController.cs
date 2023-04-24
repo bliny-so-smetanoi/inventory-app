@@ -25,7 +25,7 @@ namespace InventoryApp.Controllers.Admin
                 return BadRequest("Invalid input credentials!");
             }
                 
-            var token = await _authenticationService.Authenticate(parameter.Email, parameter.Password);
+            var (token, role) = await _authenticationService.Authenticate(parameter.Email, parameter.Password);
 
             if (string.IsNullOrWhiteSpace(token))
             {
@@ -34,7 +34,8 @@ namespace InventoryApp.Controllers.Admin
 
             return Ok(new UserAuthenticationResponse
             {
-                Token = token
+                Token = token,
+                Role = role
             });
 
         }

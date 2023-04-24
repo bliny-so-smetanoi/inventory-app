@@ -14,11 +14,38 @@ namespace InventoryApp.DataAccess.Providers.EntityProviders
             _context = context;
         }
 
+        public async Task<object> GetOneById(Guid id)
+        {
+            try
+            {
+                var result = (from i in _context.Items
+                              join cl in _context.Classrooms
+                              on i.ClassroomId equals cl.Id
+                              join c in _context.Categories
+                              on i.CategoryId equals c.Id
+                              where i.Id.Equals(id)
+                              select new
+                              {
+                                  Name = i.Name,
+                                  Id = i.Id,
+                                  CategoryName = c.Name,
+                                  CategoryId = c.Id,
+                                  Description = i.Description,
+                                  ItemNumber = i.ItemNumber,
+                                  ClassroomId = cl.Id,
+                                  Condition = i.Condition,
+                                  IconUrl = i.IconUrl,
+                                  ClassroomName = cl.ClassroomName,
+                              });
+                return result.FirstOrDefaultAsync<object>().Result;
+
+            } catch(Exception) { throw; }
+        }
+
         public async Task<List<object>> GetAllItems(Guid id)
         {
             try
             {
-                Console.WriteLine(id);
                 var result = (from i in _context.Items
                               join cl in _context.Classrooms
                               on i.ClassroomId equals cl.Id
@@ -38,7 +65,7 @@ namespace InventoryApp.DataAccess.Providers.EntityProviders
                                   IconUrl = i.IconUrl,
                                   ClassroomName = cl.ClassroomName,
                               });
-
+                
                 return result.ToList<object>();
             }
             catch (Exception)

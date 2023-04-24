@@ -21,7 +21,7 @@ namespace InventoryApp.Services
             SecretOptions = secretOptions.Value;
             _userProvider = adminProvider;
         }
-        public async Task<string> Authenticate(string login, string password)
+        public async Task<(string, int?)> Authenticate(string login, string password)
         {
             try {
                 var admin = await _userProvider.GetByEmail(login);
@@ -30,11 +30,11 @@ namespace InventoryApp.Services
                     throw new ArgumentException("Incorrect password");
                 }
 
-                return GenerateJwtToken(admin.Email, admin.Role);
+                return (GenerateJwtToken(admin.Email, admin.Role), (int) admin.Role);
             }
             catch (ArgumentException e)
             {
-                return null;
+                return (null, null);
             }
         }
         private string GenerateJwtToken(string login, UserRole role)

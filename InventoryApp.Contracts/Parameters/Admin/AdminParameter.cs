@@ -9,7 +9,7 @@ namespace InventoryApp.Contracts.Parameters.Admin
         public string Email { get; set; }
         [MinLength(2)]
         public string FullName { get; set; }
-        public UserRole Role { get; set; }
+        public string Role { get; set; }
         [MinLength(8)]
         public string Password { get; set; }
     }

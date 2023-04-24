@@ -3,6 +3,7 @@ using InventoryApp.Contracts.Attributes;
 using InventoryApp.Contracts.Parameters.Item;
 using InventoryApp.DataAccess.Providers.Interfaces;
 using InventoryApp.Models.Users.User;
+using InventoryApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Contracts;
 
@@ -15,11 +16,26 @@ namespace InventoryApp.Controllers.Item
     {
         private readonly ItemProvider _itemProvider;
         private readonly IClassroomProvider _classroomProvider;
-        public ItemController(ItemProvider itemProvider, IClassroomProvider classroomProvider) { 
+        private readonly AwsS3FileUploadService _uploadService;
+        public ItemController(ItemProvider itemProvider, IClassroomProvider classroomProvider, AwsS3FileUploadService uploadService) { 
             _itemProvider = itemProvider;
             _classroomProvider = classroomProvider;
+            _uploadService = uploadService;
         }
+        [HttpPost("upload")]
+        public async Task<IActionResult> Upload(IFormFile file)
+        {
+            try
+            {
+                var result = await _uploadService.UploadFileAsync(file);
 
+                return Ok(new { fileUrl = result });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ItemCreateParameter itemCreateParameter)
         {
@@ -64,7 +80,7 @@ namespace InventoryApp.Controllers.Item
         {
             try
             {
-                var result = await _itemProvider.GetById(id);
+                var result = await _itemProvider.GetOneById(id);
 
                 return Ok(result);
             } catch(Exception ex)
@@ -82,6 +98,9 @@ namespace InventoryApp.Controllers.Item
                     throw new Exception("No such item");
 
                 var classroom = await _classroomProvider.FirstOrDefault(x => x.ClassroomName == parameter.ClassroomId);
+
+                if (classroom is null)
+                    return NotFound(new { message = "There is no classes with given name or number!" });
 
                 editItem.Name = parameter.Name;
                 editItem.Description = parameter.Description;
