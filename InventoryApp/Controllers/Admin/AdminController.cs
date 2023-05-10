@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Configuration;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace InventoryApp.Controllers.Admin
 {
@@ -30,6 +31,7 @@ namespace InventoryApp.Controllers.Admin
 
             return Ok(result); 
         }
+
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -47,6 +49,7 @@ namespace InventoryApp.Controllers.Admin
 
             return Ok(result);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AdminParameter parameter)
         {
@@ -75,8 +78,8 @@ namespace InventoryApp.Controllers.Admin
             {
                 return BadRequest(ex.Message);
             }
-            
         }
+
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, [FromBody] AdminParameter parameter)
         {
@@ -109,6 +112,7 @@ namespace InventoryApp.Controllers.Admin
                 return NotFound(e.Message);
             }
         }
+
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -121,6 +125,20 @@ namespace InventoryApp.Controllers.Admin
             return Ok(new {message = "User was deleted!"});
         }
 
+        [HttpGet("search/{param}")]
+        public async Task<IActionResult> SearchByEmail(string param)
+        {
+            try
+            {
+                
+                var res = await _userProvider.Get(x => Regex.IsMatch(x.Email, param));
 
+                return Ok(res);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

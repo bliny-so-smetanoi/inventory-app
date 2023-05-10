@@ -6,6 +6,7 @@ using InventoryApp.Models.Users.User;
 using InventoryApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Contracts;
+using System.Text.RegularExpressions;
 
 namespace InventoryApp.Controllers.Item
 {
@@ -136,6 +137,20 @@ namespace InventoryApp.Controllers.Item
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpGet("search/{classroom}/{param}")]
+        public async Task<IActionResult> Search(string classroom, string param)
+        {
+            try
+            { 
+                var result = await _itemProvider.Get(x => (Regex.IsMatch(x.Name, param) && x.ClassroomId.Equals(Guid.Parse(classroom))));
+
+                return Ok(result);
+            }
+            catch (Exception) {
+                return BadRequest();
+            }
         }
     }
 }

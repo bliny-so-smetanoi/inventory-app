@@ -1,4 +1,5 @@
 ﻿using InventoryApp.Models;
+using InventoryApp.Models.ResultModels;
 using InventoryApp.Models.Users.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
@@ -11,7 +12,10 @@ namespace InventoryApp.DataAccess
         public DbSet<Image> Images { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
+        public DbSet<Reports> Reports { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<SearchResult> SearchResults { get; set; }
+        public DbSet<StatisticsCategoryPerClassResult> StatisticsCategoryPerCat { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {

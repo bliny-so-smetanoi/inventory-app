@@ -11,6 +11,7 @@ namespace InventoryApp.AppStart.ConfigureServices
             services.AddScoped<IClassroomProvider, EntityClassroomProvider>();
             services.AddScoped<ICategoryProvider, EntityCategoryProvider>();
             services.AddScoped<ItemProvider, EntityItemProvider>();
+            services.AddScoped<IReportProvider, EntityReportsProvider>();
         }
     }
 }

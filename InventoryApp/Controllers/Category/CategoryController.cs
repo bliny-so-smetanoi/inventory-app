@@ -6,6 +6,7 @@ using InventoryApp.Models;
 using InventoryApp.Models.Users.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace InventoryApp.Controllers.Category
 {
@@ -112,6 +113,21 @@ namespace InventoryApp.Controllers.Category
             } catch (Exception ex) {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("search/{param}")]
+        public async Task<IActionResult> SearchByName(string param)
+        {
+            try
+            {
+                var result = await _categoryProvider.Get(x => Regex.IsMatch(x.Name, param));
+
+                return Ok(result);
+            } catch(Exception)
+            {
+                return BadRequest();
+            }
+
         }
     }
 }

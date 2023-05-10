@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using System.Text.RegularExpressions;
 
 namespace InventoryApp.Controllers.Classrooms
 {
@@ -118,6 +119,37 @@ namespace InventoryApp.Controllers.Classrooms
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin, UserRole.Moderator)]
+        [HttpGet("search/{category}/{numberofitems:int}")]
+        public async Task<IActionResult> Search(string category, int numberOfItems)
+        {
+            try
+            {
+                Console.WriteLine(category);
+                var result = await _classroomProvider.SearchClassroomByQuery(category, numberOfItems);
+
+                return Ok(result);
+            } catch(Exception)
+            {
+                return NotFound();
+            }
+        }
+        [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin, UserRole.Moderator)]
+        [HttpGet("search/{classroom}")]
+        public async Task<IActionResult> SearchByName(string classroom)
+        {
+            try
+            {
+                var result = await _classroomProvider.Get(x => Regex.IsMatch(x.ClassroomName, classroom));
+
+                return Ok(result);
+            } catch(Exception)
+            {
+                return NotFound();
+            }
+
         }
     }
 }
