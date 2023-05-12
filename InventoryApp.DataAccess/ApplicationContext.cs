@@ -36,7 +36,7 @@ namespace InventoryApp.DataAccess
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Classroom>().HasIndex(u => u.ClassroomName).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(u => u.Name).IsUnique();
-           
+            modelBuilder.Entity<Item>().HasIndex(u => u.ItemNumber).IsUnique();
 
         }
     }

@@ -6,6 +6,7 @@ using InventoryApp.Models.Users.User;
 using InventoryApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Contracts;
+using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 
 namespace InventoryApp.Controllers.Item
@@ -22,6 +23,49 @@ namespace InventoryApp.Controllers.Item
             _itemProvider = itemProvider;
             _classroomProvider = classroomProvider;
             _uploadService = uploadService;
+        }
+        [HttpGet("bynumber/{number}")]
+        public async Task<IActionResult> GetByNumber(string number)
+        {
+            try
+            {
+                var item = await _itemProvider.Get(x => x.ItemNumber.Equals(number));
+
+                return Ok(item);
+            } catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost("fromscanner")]
+        public async Task<IActionResult> CreateFromScanner([FromBody] ItemCreateParameter itemCreateParameter)
+        {
+            try
+            {
+                var classroom = await _classroomProvider.FirstOrDefault(x => x.ClassroomName == itemCreateParameter.ClassroomId);
+
+                if (classroom is null)
+                    return NotFound(new { message = "There is no classes with given name or number!" });
+
+                var newItem = new Models.Item
+                {
+                    Name = itemCreateParameter.Name,
+                    Description = itemCreateParameter.Description,
+                    IconUrl = itemCreateParameter.IconUrl,
+                    Condition = itemCreateParameter.Condition,
+                    ClassroomId = classroom.Id,
+                    CategoryId = Guid.Parse(itemCreateParameter.CategoryId),
+                    ItemNumber = itemCreateParameter.ItemNumber,
+                };
+
+                await _itemProvider.Add(newItem);
+
+                return Ok(new { message = "Item was added successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpPost("upload")]
         public async Task<IActionResult> Upload(IFormFile file)
@@ -97,7 +141,7 @@ namespace InventoryApp.Controllers.Item
             {
                 var editItem = await _itemProvider.GetById(id) ??
                     throw new Exception("No such item");
-
+                
                 var classroom = await _classroomProvider.FirstOrDefault(x => x.ClassroomName == parameter.ClassroomId);
 
                 if (classroom is null)
