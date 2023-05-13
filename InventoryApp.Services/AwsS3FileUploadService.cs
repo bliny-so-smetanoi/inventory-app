@@ -35,7 +35,7 @@ namespace InventoryApp.Services
                 {
                     InputStream = file,
                     Key = docName,
-                    BucketName = _options.BucketName,
+                    BucketName = _options.BucketName
                 };
                 using var client = new AmazonS3Client(credentials, config);
                 var transferUtility = new TransferUtility(client);
@@ -91,7 +91,7 @@ namespace InventoryApp.Services
             }
             catch (AmazonS3Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             catch (Exception)
             {

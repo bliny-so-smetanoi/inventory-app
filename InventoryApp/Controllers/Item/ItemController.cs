@@ -2,6 +2,7 @@
 using InventoryApp.Contracts.Attributes;
 using InventoryApp.Contracts.Parameters.Item;
 using InventoryApp.DataAccess.Providers.Interfaces;
+using InventoryApp.Models;
 using InventoryApp.Models.Users.User;
 using InventoryApp.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +20,15 @@ namespace InventoryApp.Controllers.Item
         private readonly ItemProvider _itemProvider;
         private readonly IClassroomProvider _classroomProvider;
         private readonly AwsS3FileUploadService _uploadService;
-        public ItemController(ItemProvider itemProvider, IClassroomProvider classroomProvider, AwsS3FileUploadService uploadService) { 
+        private readonly ImageProvider _imageProvider;
+        public ItemController(ItemProvider itemProvider,
+            IClassroomProvider classroomProvider,
+            AwsS3FileUploadService uploadService,
+            ImageProvider imageProvider) { 
             _itemProvider = itemProvider;
             _classroomProvider = classroomProvider;
             _uploadService = uploadService;
+            _imageProvider= imageProvider;
         }
         [HttpGet("bynumber/{number}")]
         public async Task<IActionResult> GetByNumber(string number)
@@ -67,14 +73,62 @@ namespace InventoryApp.Controllers.Item
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("getimages/{id:guid}")]
+        public async Task<IActionResult> GetImages(Guid id)
+        {
+            try
+            {
+                var result = await _imageProvider.Get(x => x.EntityId.Equals(id));
+
+                    
+                return Ok(result);
+            } catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost("upload")]
         public async Task<IActionResult> Upload(IFormFile file)
         {
             try
             {
+                if(file is null)
+                {
+                    return Ok();
+                }
                 var result = await _uploadService.UploadFileAsync(file);
 
                 return Ok(new { fileUrl = result });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+        [HttpPost("uploadmany")]
+        public async Task<IActionResult> UploadMany([FromForm]UploadItemsParameter parameter)
+        {
+            try
+            {
+                var range = new List<Image>();
+                var owner = parameter.Owner;
+
+                if (parameter.files.Count == 0)
+                {
+                    return Ok();
+                }
+
+                foreach (var file in parameter.files)
+                {
+                    Console.WriteLine(file.FileName);
+                    var result = await _uploadService.UploadFileAsync(file);
+                    range.Add(new Image { EntityId = Guid.Parse(owner) , Url = result});
+                }
+
+                await _imageProvider.AddRange(range);
+
+                return Ok(new { message = "Images were uploaded."});
             }
             catch (Exception e)
             {

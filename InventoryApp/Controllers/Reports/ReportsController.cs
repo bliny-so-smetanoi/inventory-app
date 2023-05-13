@@ -26,6 +26,7 @@ namespace InventoryApp.Controllers.Reports
         {
             try
             {
+                Console.WriteLine("ok");
                 var data = await _authService.GetUserByHeaders(Request.Headers[HeaderNames.Authorization].ToArray());
                 await _reportService.GenerateReport(createReportParameter.Classroom, data.Id.ToString());
 

@@ -12,6 +12,7 @@ namespace InventoryApp.AppStart.ConfigureServices
             services.AddScoped<ICategoryProvider, EntityCategoryProvider>();
             services.AddScoped<ItemProvider, EntityItemProvider>();
             services.AddScoped<IReportProvider, EntityReportsProvider>();
+            services.AddScoped<ImageProvider, EntityImageProvider>();
         }
     }
 }

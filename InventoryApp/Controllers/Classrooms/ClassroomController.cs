@@ -142,6 +142,7 @@ namespace InventoryApp.Controllers.Classrooms
         {
             try
             {
+                
                 var result = await _classroomProvider.Get(x => Regex.IsMatch(x.ClassroomName, classroom));
 
                 return Ok(result);

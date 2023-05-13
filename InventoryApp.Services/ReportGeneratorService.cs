@@ -45,7 +45,7 @@ namespace InventoryApp.Services
                         page.Size(PageSizes.A4);
                         page.Margin(1, Unit.Centimetre);
                         page.PageColor(Colors.White);
-                        page.DefaultTextStyle(x => x.FontSize(15));
+                        page.DefaultTextStyle(x => x.FontSize(15).FontFamily(Fonts.TimesNewRoman));
 
                         page.Header().Row(x =>
                         {
