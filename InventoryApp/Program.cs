@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace InventoryApp
 {
     public class Program
@@ -9,6 +11,9 @@ namespace InventoryApp
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseIISIntegration()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseStartup<Startup>(); });
     }
 }

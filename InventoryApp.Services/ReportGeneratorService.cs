@@ -2,8 +2,8 @@
 using QuestPDF.Previewer;
 using QuestPDF.Helpers;
 using QuestPDF.Fluent;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using InventoryApp.DataAccess.Providers.Interfaces;
+using System.Runtime.CompilerServices;
 
 namespace InventoryApp.Services
 {
@@ -13,15 +13,18 @@ namespace InventoryApp.Services
         private readonly ItemProvider _itemProvider;
         private readonly AwsS3FileUploadService _uploadService;
         private readonly IReportProvider _reportProvider;
+        private readonly ILogger<ReportGeneratorService> _logger;
         public ReportGeneratorService(IClassroomProvider classroomProvider,
             ItemProvider itemProvider,
             AwsS3FileUploadService uploadService,
-            IReportProvider reportProvider)
+            IReportProvider reportProvider,
+            ILogger<ReportGeneratorService> logger)
         {
             _classroomProvider = classroomProvider;
             _itemProvider = itemProvider;
             _uploadService = uploadService;
             _reportProvider = reportProvider;
+            _logger = logger;
         }
 
         public async Task GenerateReport(string classroom, string userId)
@@ -46,10 +49,11 @@ namespace InventoryApp.Services
                         page.Margin(1, Unit.Centimetre);
                         page.PageColor(Colors.White);
                         page.DefaultTextStyle(x => x.FontSize(15).FontFamily(Fonts.TimesNewRoman));
-
+                        Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
                         page.Header().Row(x =>
                         {
-                            x.ConstantItem(150).Width(150).Height(80).Image("C:\\Users\\akezh\\source\\repos\\InventoryApp\\InventoryApp.Services\\aitu.png", ImageScaling.Resize);
+                            _logger.LogInformation(System.IO.Directory.GetCurrentDirectory());
+                            x.ConstantItem(150).Width(150).Height(80).Image(System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\aitu.png", ImageScaling.Resize);
                             x.RelativeItem().AlignRight().Text("Report").SemiBold().FontSize(30);
                         });
 
@@ -120,13 +124,14 @@ namespace InventoryApp.Services
                 }).GeneratePdf(tempName);
 
 
-                var memoryStream = new MemoryStream(File.ReadAllBytes("C:\\Users\\akezh\\source\\repos\\InventoryApp\\InventoryApp\\" + tempName));
-                var url = await _uploadService.UploadReport(memoryStream, "C:\\Users\\akezh\\source\\repos\\InventoryApp\\InventoryApp\\" + tempName);
+                var memoryStream = new MemoryStream(File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "\\" + tempName));
+                var url = await _uploadService.UploadReport(memoryStream, System.IO.Directory.GetCurrentDirectory()+ "\\" + tempName);
 
                 await _reportProvider.Add(new Models.Reports { ReportUrl = url, UserId = Guid.Parse(userId) });
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                _logger.LogInformation(ex.Message);
             }
             
         }

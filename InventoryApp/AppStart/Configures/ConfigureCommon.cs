@@ -16,6 +16,7 @@ namespace InventoryApp.AppStart.Configures
             }
 
             app.UseResponseCaching();
+            app.UseStaticFiles();
             // app.UseSwagger();
             // app.UseSwaggerUI(ConfigureServicesSwagger.SwaggerClientSettings);
             // app.UseSwaggerUI(ConfigureServicesSwagger.SwaggerAdminSettings);
