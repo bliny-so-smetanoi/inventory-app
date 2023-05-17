@@ -57,5 +57,11 @@ namespace InventoryApp.DataAccess.Providers.EntityProviders
             _dbSet.Remove(removed);
             await _context.SaveChangesAsync();
         }
+
+        public virtual async Task RemoveRange(List<TEntity> range)
+        {
+            _dbSet.RemoveRange(range);
+            await _context.SaveChangesAsync();
+        }
     }
 }

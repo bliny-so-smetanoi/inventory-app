@@ -16,8 +16,12 @@ namespace InventoryApp.Controllers.Category
     public class CategoryController : Controller
     {
         private readonly ICategoryProvider _categoryProvider;
-        public CategoryController(ICategoryProvider categoryProvider) {
+        private readonly ItemProvider _itemProvider;
+        public CategoryController(ICategoryProvider categoryProvider,
+            ItemProvider itemProvider)
+        {
             _categoryProvider = categoryProvider;
+            _itemProvider = itemProvider;
         }
 
         [HttpPost]
@@ -106,7 +110,12 @@ namespace InventoryApp.Controllers.Category
 
                 if (category is null) return NotFound();
 
+
                 await _categoryProvider.Remove(category);
+                var forDelete = await _itemProvider.Get(x => x.CategoryId == id);
+                if (forDelete is null) return Ok();
+
+                await _itemProvider.RemoveRange(forDelete);
 
                 return Ok(new { message = "Category has been deleted successfully" });
 

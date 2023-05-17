@@ -12,5 +12,6 @@ namespace InventoryApp.DataAccess.Providers.Interfaces
         Task AddRange(IEnumerable<TEntity> added);
         Task Edit(TEntity edited);
         Task Remove(TEntity removed);
+        Task RemoveRange(List<TEntity> range);
     }
 }

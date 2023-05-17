@@ -16,9 +16,12 @@ namespace InventoryApp.Controllers.Classrooms
     public class ClassroomController : Controller
     {
         private readonly IClassroomProvider _classroomProvider;
-
-        public ClassroomController(IClassroomProvider classroomProvider) {
+        private readonly ItemProvider _itemProvider;
+        public ClassroomController(IClassroomProvider classroomProvider,
+            ItemProvider itemProvider = null)
+        {
             _classroomProvider = classroomProvider;
+            _itemProvider = itemProvider;
         }
         [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin)]
         [HttpPost]
@@ -113,6 +116,10 @@ namespace InventoryApp.Controllers.Classrooms
                 if (classroom is null) return NotFound();
                 
                 await _classroomProvider.Remove(classroom);
+                var forDelete = await _itemProvider.Get(x => x.ClassroomId == id);
+                if (forDelete is null) return Ok();
+
+                await _itemProvider.RemoveRange(forDelete);
 
                 return Ok(new {message = "Classroom has been deleted successfully"});
             } catch(Exception ex)
