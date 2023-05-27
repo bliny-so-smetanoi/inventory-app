@@ -23,7 +23,7 @@ namespace InventoryApp.AppStart.Configures
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseWebSockets();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

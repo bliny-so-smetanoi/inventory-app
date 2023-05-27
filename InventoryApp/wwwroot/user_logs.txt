@@ -1,0 +1,10 @@
+﻿
+Log Entry : 12:32:35 AM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.NotFoundResult; url: http://localhost:5297/api/item/6fc6aab0-694b-42b7-8055-23751cd9cfea; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 12:32:55 AM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/d9c964e5-829b-4fc1-a68c-0a72910c164e; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------

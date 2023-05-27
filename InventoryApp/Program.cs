@@ -12,7 +12,7 @@ namespace InventoryApp
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseIISIntegration()
-                .UseKestrel()
+                
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>(); });
     }

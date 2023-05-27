@@ -45,7 +45,7 @@ namespace InventoryApp.AppStart.Filters
         {
             try
             {
-                var path = System.IO.Directory.GetCurrentDirectory() + "\\" + "user_logs.txt";
+                var path = System.IO.Directory.GetCurrentDirectory() + "\\" + "wwwroot\\user_logs.txt";
                 var stream = new FileStream(path, FileMode.Append);
                 using (StreamWriter w = new StreamWriter(stream, Encoding.UTF8))
                 {

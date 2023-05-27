@@ -178,7 +178,7 @@ namespace InventoryApp.Controllers.Admin
         {
             try
             {
-                Stream file = new MemoryStream(System.IO.File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "\\" + "user_logs.txt"));
+                Stream file = new MemoryStream(System.IO.File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "\\" + "wwwroot\\user_logs.txt"));
 
                 var url = await _uploadService.UploadLogs(file);
 
