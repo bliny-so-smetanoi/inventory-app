@@ -20,6 +20,8 @@
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="3.7.103.10" />
     <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+    <PackageReference Include="MailKit" Version="4.0.0" />
+    <PackageReference Include="MimeKit" Version="4.0.0" />
     <PackageReference Include="QuestPDF" Version="2023.4.2" />
     <PackageReference Include="SkiaSharp" Version="2.88.3" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3" />

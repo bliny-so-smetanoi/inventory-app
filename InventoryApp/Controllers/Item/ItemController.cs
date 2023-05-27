@@ -1,4 +1,5 @@
 ﻿using Amazon.S3.Model.Internal.MarshallTransformations;
+using InventoryApp.AppStart.Filters;
 using InventoryApp.Contracts.Attributes;
 using InventoryApp.Contracts.Parameters.Item;
 using InventoryApp.DataAccess.Providers.Interfaces;
@@ -52,6 +53,8 @@ namespace InventoryApp.Controllers.Item
                 return BadRequest();
             }
         }
+
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpPost("fromscanner")]
         public async Task<IActionResult> CreateFromScanner([FromBody] ItemCreateParameter itemCreateParameter)
         {
@@ -157,6 +160,8 @@ namespace InventoryApp.Controllers.Item
                 await _hub.Clients.Clients(list).SendAsync("SendReload");
             }
         }
+
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ItemCreateParameter itemCreateParameter)
         {
@@ -210,6 +215,7 @@ namespace InventoryApp.Controllers.Item
             }
         }
 
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, [FromBody] ItemCreateParameter parameter)
         {
@@ -240,6 +246,7 @@ namespace InventoryApp.Controllers.Item
             }
         }
 
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {

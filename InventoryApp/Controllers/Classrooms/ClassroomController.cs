@@ -1,4 +1,5 @@
-﻿using InventoryApp.Contracts.Attributes;
+﻿using InventoryApp.AppStart.Filters;
+using InventoryApp.Contracts.Attributes;
 using InventoryApp.Contracts.Parameters.Classroom;
 using InventoryApp.DataAccess.Providers.Interfaces;
 using InventoryApp.Models;
@@ -23,6 +24,8 @@ namespace InventoryApp.Controllers.Classrooms
             _classroomProvider = classroomProvider;
             _itemProvider = itemProvider;
         }
+
+        [ServiceFilter(typeof(UserActionAttribute))]
         [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ClassroomCreateParameter classroomCreate)
@@ -45,6 +48,7 @@ namespace InventoryApp.Controllers.Classrooms
                 return BadRequest(new { message = "Classroom with given number/name is already added!" });
             }
         }
+
         [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin, UserRole.Moderator)]
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
@@ -73,6 +77,8 @@ namespace InventoryApp.Controllers.Classrooms
                 return BadRequest(ex.Message);
             }
         }
+
+        [ServiceFilter(typeof(UserActionAttribute))]
         [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin)]
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, [FromBody] ClassroomEditParameter classroomEditParameter)
@@ -105,6 +111,8 @@ namespace InventoryApp.Controllers.Classrooms
                 return NotFound(ex.Message);
             }
         }
+
+        [ServiceFilter(typeof(UserActionAttribute))]
         [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin)]
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)

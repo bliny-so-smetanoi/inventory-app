@@ -1,4 +1,5 @@
-﻿using InventoryApp.Contracts.Parameters;
+﻿using InventoryApp.AppStart.Filters;
+using InventoryApp.Contracts.Parameters;
 using InventoryApp.Contracts.Responses;
 using InventoryApp.DataAccess.Providers.Interfaces;
 using InventoryApp.Services;
@@ -44,7 +45,7 @@ namespace InventoryApp.Controllers.Admin
             });
 
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> GetData()
         {

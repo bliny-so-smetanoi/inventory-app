@@ -1,4 +1,5 @@
-﻿using InventoryApp.Contracts.Options;
+﻿using InventoryApp.AppStart.Filters;
+using InventoryApp.Contracts.Options;
 using InventoryApp.DataAccess;
 using InventoryApp.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,13 +22,18 @@ namespace InventoryApp.AppStart.ConfigureServices
             });*/
             services.AddSignalR();
             services.AddMemoryCache();
+            
             QuestPDF.Settings.License = LicenseType.Community;
             services.Configure<SecretOption>(configuration.GetSection("Secrets"));
             services.Configure<AwsS3Options>(configuration.GetSection("AwsS3"));
+            services.Configure<EmailSenderOptions>(configuration.GetSection("EmailAccountCredentials"));
+            services.Configure<SmtpClientOptions>(configuration.GetSection("SMTPClient"));
 
             services.AddScoped<UserAuthenticationService>();
             services.AddScoped<AwsS3FileUploadService>();
             services.AddScoped<ReportGeneratorService>();
+            services.AddScoped<UserActionAttribute>();
+            services.AddScoped<MailKitEmailSenderService>();
 
             services.AddAuthentication();
             services.AddAuthorization();

@@ -10,7 +10,5 @@ namespace InventoryApp.Contracts.Parameters.Admin
         [MinLength(2)]
         public string FullName { get; set; }
         public string Role { get; set; }
-        [MinLength(8)]
-        public string Password { get; set; }
     }
 }

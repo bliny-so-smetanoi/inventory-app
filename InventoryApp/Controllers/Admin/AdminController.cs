@@ -1,4 +1,5 @@
 ﻿using Amazon.S3.Model;
+using InventoryApp.AppStart.Filters;
 using InventoryApp.Contracts.Attributes;
 using InventoryApp.Contracts.Parameters.Admin;
 using InventoryApp.Contracts.Responses;
@@ -10,6 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Configuration;
 using System.Net;
 using System.Text.RegularExpressions;
+using PasswordGenerator;
+using InventoryApp.Contracts.Dtos;
+using InventoryApp.Contracts.Options;
+using Microsoft.Extensions.Options;
 
 namespace InventoryApp.Controllers.Admin
 {
@@ -19,9 +24,19 @@ namespace InventoryApp.Controllers.Admin
     public class AdminController : Controller
     {
         private readonly IUserProvider _userProvider;
+        private readonly AwsS3FileUploadService _uploadService;
+        private readonly MailKitEmailSenderService _emailSenderService;
+        private readonly IOptions<EmailSenderOptions> _emailSenderOptions;
 
-        public AdminController(IUserProvider userProvider) {
+        public AdminController(IUserProvider userProvider,
+            AwsS3FileUploadService uploadService,
+            MailKitEmailSenderService emailSenderService,
+            IOptions<EmailSenderOptions> options)
+        {
             _userProvider = userProvider;
+            _uploadService = uploadService;
+            _emailSenderService = emailSenderService;
+            _emailSenderOptions= options;
         }
 
         [HttpGet]
@@ -50,6 +65,7 @@ namespace InventoryApp.Controllers.Admin
             return Ok(result);
         }
 
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AdminParameter parameter)
         {
@@ -61,7 +77,8 @@ namespace InventoryApp.Controllers.Admin
                 if (user is not null)
                     return BadRequest("Admin or moderator with current email existed");
 
-                var passwordHash = BCrypt.Net.BCrypt.HashPassword(parameter.Password);
+                var password = new Password().IncludeLowercase().IncludeNumeric().IncludeUppercase().IncludeSpecial().Next();
+                var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
 
                 var newUser = new User
                 {
@@ -71,6 +88,20 @@ namespace InventoryApp.Controllers.Admin
                     Password = passwordHash
                 };
 
+                var result = await _emailSenderService.SendEmail(new EmailDto
+                {
+                    FromName = _emailSenderOptions.Value.Name,
+                    FromAddress = _emailSenderOptions.Value.Login,
+                    FromPassword = _emailSenderOptions.Value.Password,
+                    ToAddress = parameter.Email,
+                    ToName = parameter.FullName,
+                    Subject = "Password Inventory App AITU",
+                    Text = "Your password: " + password
+                }); ;
+
+                if(result != "Ok") { 
+                    return BadRequest(result);
+                }
                 await _userProvider.Add(newUser);
 
                 return Ok(new {message = "User was added!"});
@@ -80,6 +111,7 @@ namespace InventoryApp.Controllers.Admin
             }
         }
 
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, [FromBody] AdminParameter parameter)
         {
@@ -96,7 +128,7 @@ namespace InventoryApp.Controllers.Admin
 
                 if (admin is null || admin.Role == UserRole.SuperAdmin) return NotFound();
                 
-                var passwordHash = BCrypt.Net.BCrypt.HashPassword(parameter.Password);
+                var passwordHash = BCrypt.Net.BCrypt.HashPassword("");
 
                 admin.Email = parameter.Email;
                 admin.Role = (UserRole)Int32.Parse(parameter.Role);
@@ -112,7 +144,7 @@ namespace InventoryApp.Controllers.Admin
                 return NotFound(e.Message);
             }
         }
-
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -140,5 +172,23 @@ namespace InventoryApp.Controllers.Admin
                 return BadRequest();
             }
         }
+
+        [HttpGet("logs")]
+        public async Task<IActionResult> GetLogs()
+        {
+            try
+            {
+                Stream file = new MemoryStream(System.IO.File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "\\" + "user_logs.txt"));
+
+                var url = await _uploadService.UploadLogs(file);
+
+                return Ok(new { url });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

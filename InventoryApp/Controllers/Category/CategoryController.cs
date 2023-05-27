@@ -1,4 +1,5 @@
-﻿using InventoryApp.Contracts.Attributes;
+﻿using InventoryApp.AppStart.Filters;
+using InventoryApp.Contracts.Attributes;
 using InventoryApp.Contracts.Parameters.Category;
 using InventoryApp.Contracts.Parameters.Classroom;
 using InventoryApp.DataAccess.Providers.Interfaces;
@@ -24,6 +25,7 @@ namespace InventoryApp.Controllers.Category
             _itemProvider = itemProvider;
         }
 
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCategoryParameter categoryParameter)
         {
@@ -71,6 +73,7 @@ namespace InventoryApp.Controllers.Category
             }
         }
 
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, [FromBody] CreateCategoryParameter editParameter)
         {
@@ -101,6 +104,7 @@ namespace InventoryApp.Controllers.Category
             }
         }
 
+        [ServiceFilter(typeof(UserActionAttribute))]
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
