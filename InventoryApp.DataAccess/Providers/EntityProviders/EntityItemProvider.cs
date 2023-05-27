@@ -36,6 +36,7 @@ namespace InventoryApp.DataAccess.Providers.EntityProviders
                                   Condition = i.Condition,
                                   IconUrl = i.IconUrl,
                                   ClassroomName = cl.ClassroomName,
+                                  
                               });
                 return result.FirstOrDefaultAsync<object>().Result;
 
@@ -51,7 +52,7 @@ namespace InventoryApp.DataAccess.Providers.EntityProviders
                               on i.ClassroomId equals cl.Id
                               join c in _context.Categories
                               on i.CategoryId equals c.Id
-                              where i.ClassroomId.Equals(id)
+                              where i.ClassroomId.Equals(id) orderby i.DateTime descending
                               select new
                               {
                                   Name = i.Name,
@@ -64,6 +65,7 @@ namespace InventoryApp.DataAccess.Providers.EntityProviders
                                   Condition = i.Condition,
                                   IconUrl = i.IconUrl,
                                   ClassroomName = cl.ClassroomName,
+                                  DateTime= i.DateTime,
                               });
                 
                 return result.ToList<object>();

@@ -77,7 +77,7 @@ namespace InventoryApp.Controllers.Item
                 };
 
                 await _itemProvider.Add(newItem);
-
+                await SendReload(classroom.Id.ToString());
                 return Ok(new { message = "Item was added successfully!" });
             }
             catch (Exception ex)
@@ -253,11 +253,12 @@ namespace InventoryApp.Controllers.Item
             try
             {
                 var item = await _itemProvider.GetById(id);
-
+                var classroomId = item.ClassroomId;
                 if (item is null) return NotFound();
-
+                
+                
                 await _itemProvider.Remove(item);
-
+                await SendReload(classroomId.ToString());
                 return Ok(new {message = "Item was deleted successfully!"});
             } catch(Exception ex)
             {

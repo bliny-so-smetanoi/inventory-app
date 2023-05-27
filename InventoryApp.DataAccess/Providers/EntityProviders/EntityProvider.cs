@@ -39,12 +39,12 @@ namespace InventoryApp.DataAccess.Providers.EntityProviders
 
         public virtual async Task<List<TEntity>> Get(Func<TEntity, bool> predicate, int take = int.MaxValue, int skip = 0)
         {
-            return (await GetAll()).Where(predicate).OrderBy(entity => entity.DateTime).Skip(skip).Take(take).ToList();
+            return (await GetAll()).Where(predicate).OrderByDescending(entity => entity.DateTime).Skip(skip).Take(take).ToList();
         }
 
         public virtual async Task<List<TEntity>> GetAll(int take = int.MaxValue, int skip = 0)
         {
-            return await _dbSet.AsNoTracking().OrderBy(entity => entity.DateTime).Skip(skip).Take(take).ToListAsync();
+            return await _dbSet.AsNoTracking().OrderByDescending(entity => entity.DateTime).Skip(skip).Take(take).ToListAsync();
         }
 
         public virtual async Task<TEntity> GetById(TId id)
@@ -56,6 +56,7 @@ namespace InventoryApp.DataAccess.Providers.EntityProviders
         {
             _dbSet.Remove(removed);
             await _context.SaveChangesAsync();
+            
         }
 
         public virtual async Task RemoveRange(List<TEntity> range)
