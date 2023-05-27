@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.HttpOverrides;
+﻿using InventoryApp.Hubs;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace InventoryApp.AppStart.Configures
 {
@@ -29,6 +30,7 @@ namespace InventoryApp.AppStart.Configures
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}"
                 );
+                endpoints.MapHub<ClassroomHub>("/hub/classroom");
             });
         }
     }

@@ -39,9 +39,9 @@ namespace InventoryApp.Controllers.Category
                 await _categoryProvider.Add(newCategory);
 
                 return Ok(new { message = "Category was added successfully!" });
-            } catch (Exception ex)
+            } catch (Exception)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new {message = "Already exists!"});
             }
         }
 
@@ -85,7 +85,7 @@ namespace InventoryApp.Controllers.Category
                 {
                     if (!checkCategory.Id.Equals(editCategory.Id))
                     {
-                        return BadRequest("Category with current name/number is existing!");
+                        return BadRequest(new { message = "Category with current name/number is existing!" });
                     }
                 }
 

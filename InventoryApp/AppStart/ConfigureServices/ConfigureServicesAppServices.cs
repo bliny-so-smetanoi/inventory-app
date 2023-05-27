@@ -12,13 +12,15 @@ namespace InventoryApp.AppStart.ConfigureServices
         {
             services.AddDbContext<ApplicationContext>(options =>
             {
-                
+
                 options.UseNpgsql(configuration.GetConnectionString("SqlConnection")).UseSnakeCaseNamingConvention();
             }, ServiceLifetime.Scoped);
             /*services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseInMemoryDatabase(configuration.GetConnectionString("InMemoryDb")).UseSnakeCaseNamingConvention();
             });*/
+            services.AddSignalR();
+            services.AddMemoryCache();
             QuestPDF.Settings.License = LicenseType.Community;
             services.Configure<SecretOption>(configuration.GetSection("Secrets"));
             services.Configure<AwsS3Options>(configuration.GetSection("AwsS3"));

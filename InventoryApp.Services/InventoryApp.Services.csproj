@@ -26,6 +26,7 @@
     <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.3" />
     <PackageReference Include="SkiaSharp.NativeAssets.macOS" Version="2.88.3" />
     <PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="2.88.3" />
+    <PackageReference Include="Spire.XLS" Version="13.5.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 

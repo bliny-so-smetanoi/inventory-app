@@ -18,7 +18,7 @@ namespace InventoryApp.Controllers.Classrooms
         private readonly IClassroomProvider _classroomProvider;
         private readonly ItemProvider _itemProvider;
         public ClassroomController(IClassroomProvider classroomProvider,
-            ItemProvider itemProvider = null)
+            ItemProvider itemProvider)
         {
             _classroomProvider = classroomProvider;
             _itemProvider = itemProvider;
@@ -158,6 +158,36 @@ namespace InventoryApp.Controllers.Classrooms
                 return NotFound();
             }
 
+        }
+
+        [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin, UserRole.Moderator)]
+        [HttpGet("getclassroomsname")]
+        public async Task<IActionResult> GetNames()
+        {
+            try
+            {
+                var result = await _classroomProvider.GetClassroomsName();
+
+                return Ok(result);
+            } catch(Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [AdminAuthorized(UserRole.SuperAdmin, UserRole.Admin, UserRole.Moderator)]
+        [HttpGet("stats/{id:guid}")]
+        public async Task<IActionResult> GetStats(Guid id)
+        {
+            try
+            {
+                var result = await _classroomProvider.StatisticsPerClassCategory(id.ToString());
+
+                return Ok(result);
+            } catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

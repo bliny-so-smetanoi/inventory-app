@@ -2,10 +2,13 @@
 using InventoryApp.Contracts.Attributes;
 using InventoryApp.Contracts.Parameters.Item;
 using InventoryApp.DataAccess.Providers.Interfaces;
+using InventoryApp.Hubs;
 using InventoryApp.Models;
 using InventoryApp.Models.Users.User;
 using InventoryApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics.Contracts;
 using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
@@ -21,14 +24,20 @@ namespace InventoryApp.Controllers.Item
         private readonly IClassroomProvider _classroomProvider;
         private readonly AwsS3FileUploadService _uploadService;
         private readonly ImageProvider _imageProvider;
+        private readonly IHubContext<ClassroomHub> _hub;
+        private readonly IMemoryCache _cache;
         public ItemController(ItemProvider itemProvider,
             IClassroomProvider classroomProvider,
             AwsS3FileUploadService uploadService,
-            ImageProvider imageProvider) { 
+            ImageProvider imageProvider,
+            IHubContext<ClassroomHub> hub,
+            IMemoryCache cache) { 
             _itemProvider = itemProvider;
             _classroomProvider = classroomProvider;
             _uploadService = uploadService;
             _imageProvider= imageProvider;
+            _hub = hub;
+            _cache = cache;
         }
         [HttpGet("bynumber/{number}")]
         public async Task<IActionResult> GetByNumber(string number)
@@ -135,6 +144,19 @@ namespace InventoryApp.Controllers.Item
                 return BadRequest(e);
             }
         }
+        private async Task SendReload(string classroomId)
+        {
+            List<string>? list;
+
+            if (_cache.TryGetValue(classroomId, out list))
+            {
+                foreach(var item in list)
+                {
+                    Console.WriteLine(item);
+                }
+                await _hub.Clients.Clients(list).SendAsync("SendReload");
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ItemCreateParameter itemCreateParameter)
         {
@@ -152,7 +174,7 @@ namespace InventoryApp.Controllers.Item
                 };
 
                 await _itemProvider.Add(newItem);
-
+                await SendReload(itemCreateParameter.ClassroomId);
                 return Ok(new { message = "Item was added successfully!" });
             } catch(Exception ex) { 
                 return BadRequest(ex.Message);

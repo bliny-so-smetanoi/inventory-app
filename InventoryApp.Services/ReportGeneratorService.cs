@@ -4,7 +4,9 @@ using QuestPDF.Helpers;
 using QuestPDF.Fluent;
 using InventoryApp.DataAccess.Providers.Interfaces;
 using System.Runtime.CompilerServices;
-
+using Spire.Xls;
+using Spire.Xls.Core;
+using System.Drawing;
 namespace InventoryApp.Services
 {
     public class ReportGeneratorService
@@ -34,12 +36,75 @@ namespace InventoryApp.Services
                 var classroomInformation = await _classroomProvider.GetById(Guid.Parse(classroom));
                 var categoryReport = await _classroomProvider.StatisticsPerClassCategory(classroom);
                 var itemReport = await _itemProvider.Get(x => x.ClassroomId.Equals(Guid.Parse(classroom)));
-                var tempName = Guid.NewGuid().ToString() + ".pdf";
-                
+                var newId = Guid.NewGuid().ToString();
+                var tempName = newId + ".pdf";
+                var tempNameXls = newId + ".xls";
+
                 if (classroomInformation is null)
                 {
                     throw new ArgumentException("Classroom does not exist!");
                 }
+                // Xls generation.
+                Workbook workbook = new Workbook();
+                Worksheet sheet = workbook.Worksheets[0];
+                workbook.Worksheets.Remove("Sheet2");
+                workbook.Worksheets.Remove("Sheet3");
+                
+                for (int i = 1; i <= 8; i++)
+                {
+                    sheet.SetColumnWidth(i, 20);
+                    
+                }
+                
+                sheet.Range["A1"].Text = "Report: ";
+                sheet.Range["A2"].Text = "Report time: ";
+                sheet.Range["A3"].Text = "Classroom number/name: ";
+                sheet.Range["A4"].Text = "Classroom description: ";
+                sheet.Range["B2"].Text = DateTime.UtcNow.ToString();
+                sheet.Range["B3"].Text = classroomInformation.ClassroomName;
+                sheet.Range["B4"].Text = classroomInformation.Description;
+                
+                
+                
+                sheet.Range["C1"].Text = "Category name";
+                sheet.Range["D1"].Text = "Item per category";
+
+                if(categoryReport.Count > 0)
+                {
+                    int count = 1;
+                    for (int i = 0; i < categoryReport.Count; i++)
+                    {
+                        sheet.Range["C" + (i + 2)].Text = categoryReport[i].Name;
+                        sheet.Range["D" + (i + 2)].Text = categoryReport[i].Count.ToString();
+                        count++;
+                    }
+                    sheet.Range["C1:D" + count.ToString()].BorderInside(LineStyleType.MediumDashed, Color.Black);
+                    sheet.Range["C1:D" + count.ToString()].BorderAround(LineStyleType.Medium, Color.Black);
+                }
+
+                sheet.Range["E1"].Text = "Name";
+                sheet.Range["F1"].Text = "Barcode number";
+                sheet.Range["G1"].Text = "Condition";
+                sheet.Range["H1"].Text = "Description";
+
+                if (itemReport.Count > 0)
+                {
+                    int count = 1;
+                    for (int i = 0; i< itemReport.Count; i++)
+                    {
+                        sheet.Range["E" + (i + 2)].Text = itemReport[i].Name;
+                        sheet.Range["F" + (i + 2)].Text = itemReport[i].ItemNumber;
+                        sheet.Range["G" + (i + 2)].Text = itemReport[i].Condition;
+                        sheet.Range["H" + (i + 2)].Text = itemReport[i].Description;
+                        count++;
+                    }
+                    sheet.Range["E1:H" + count.ToString()].BorderInside(LineStyleType.MediumDashed, Color.Blue);
+                    sheet.Range["E1:H" + count.ToString()].BorderAround(LineStyleType.Medium, Color.Blue);
+                }
+
+                workbook.SaveToFile(tempNameXls);
+
+                // PDF Generation.
 
                 Document.Create(container =>
                 {
@@ -74,12 +139,12 @@ namespace InventoryApp.Services
                                 });
 
                                 x.Cell().ColumnSpan(2).Text("Report for categories");
-                                x.Cell().Text("Name of category");
-                                x.Cell().Text("Quantity of item per category");
+                                x.Cell().AlignCenter().AlignMiddle().Text("Name of category");
+                                x.Cell().AlignCenter().AlignMiddle().Text("Quantity of item per category");
                                 foreach (var item in categoryReport)
                                 {
-                                    x.Cell().Text(item.Name);
-                                    x.Cell().Text(item.Count);
+                                    x.Cell().Border(1).Background(Colors.Grey.Lighten3).AlignCenter().AlignMiddle().Text(item.Name);
+                                    x.Cell().Border(1).Background(Colors.Grey.Lighten3).AlignCenter().AlignMiddle().Text(item.Count);
                                 }
 
                             });
@@ -96,16 +161,16 @@ namespace InventoryApp.Services
                                 });
 
                                 x.Cell().ColumnSpan(4).Text("Report for items");
-                                x.Cell().Text("Name of item");
-                                x.Cell().Text("Item number");
-                                x.Cell().Text("Condition");
-                                x.Cell().Text("Description");
+                                x.Cell().AlignCenter().AlignMiddle().Text("Name of item");
+                                x.Cell().AlignCenter().AlignMiddle().Text("Barcode number");
+                                x.Cell().AlignCenter().AlignMiddle().Text("Condition");
+                                x.Cell().AlignCenter().AlignMiddle().Text("Description");
                                 foreach (var item in itemReport)
                                 {
-                                    x.Cell().Text(item.Name);
-                                    x.Cell().Text(item.ItemNumber);
-                                    x.Cell().Text(item.Condition);
-                                    x.Cell().Text(item.Description);
+                                    x.Cell().Border(1).Background(Colors.Grey.Lighten3).AlignCenter().AlignMiddle().Text(item.Name);
+                                    x.Cell().Border(1).Background(Colors.Grey.Lighten3).AlignCenter().AlignMiddle().Text(item.ItemNumber);
+                                    x.Cell().Border(1).Background(Colors.Grey.Lighten3).AlignCenter().AlignMiddle().Text(item.Condition);
+                                    x.Cell().Border(1).Background(Colors.Grey.Lighten3).AlignCenter().AlignMiddle().Text(item.Description);
                                 }
                             });
                         });
@@ -125,9 +190,12 @@ namespace InventoryApp.Services
 
 
                 var memoryStream = new MemoryStream(File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "\\" + tempName));
-                var url = await _uploadService.UploadReport(memoryStream, System.IO.Directory.GetCurrentDirectory()+ "\\" + tempName);
+                var memoryStreamXls = new MemoryStream(File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "\\" + tempNameXls));
 
-                await _reportProvider.Add(new Models.Reports { ReportUrl = url, UserId = Guid.Parse(userId) });
+                var url = await _uploadService.UploadReport(memoryStream, System.IO.Directory.GetCurrentDirectory()+ "\\" + tempName);
+                var xlsUrl = await _uploadService.UploadXls(memoryStreamXls, System.IO.Directory.GetCurrentDirectory() + "\\" + tempNameXls);
+
+                await _reportProvider.Add(new Models.Reports { XlsUrl = xlsUrl, ReportUrl = url, UserId = Guid.Parse(userId) });
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
