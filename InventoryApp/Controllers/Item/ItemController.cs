@@ -45,7 +45,7 @@ namespace InventoryApp.Controllers.Item
         {
             try
             {
-                var item = await _itemProvider.Get(x => x.ItemNumber.Equals(number));
+                var item = await _itemProvider.GetAllByNumber(number);
 
                 return Ok(item);
             } catch (Exception)
@@ -77,7 +77,9 @@ namespace InventoryApp.Controllers.Item
                 };
 
                 await _itemProvider.Add(newItem);
-                await SendReload(classroom.Id.ToString());
+
+                var returnItem = await _itemProvider.GetAllItems(newItem.ClassroomId);
+                await SendAdd(classroom.Id.ToString(), returnItem);
                 return Ok(new { message = "Item was added successfully!" });
             }
             catch (Exception ex)
@@ -147,7 +149,45 @@ namespace InventoryApp.Controllers.Item
                 return BadRequest(e);
             }
         }
-        private async Task SendReload(string classroomId)
+
+        private async Task SendUpdate(string classroomIdOld, string classroomIdNew, object updateOld, object updateNew)
+        {
+            List<string>? list;
+
+            if (_cache.TryGetValue(classroomIdOld, out list))
+            {
+                foreach (var item in list)
+                {
+                    Console.WriteLine(item);
+                }
+                await _hub.Clients.Clients(list).SendAsync("SendUpdate", updateOld);
+            }
+
+            List<string>? list1;
+            if (_cache.TryGetValue(classroomIdNew, out list1))
+            {
+                foreach (var item in list1)
+                {
+                    Console.WriteLine(item);
+                }
+                await _hub.Clients.Clients(list1).SendAsync("SendUpdate", updateNew);
+            }
+        }
+
+        private async Task SendDelete(string classroomId, object deleted)
+        {
+            List<string>? list;
+
+            if (_cache.TryGetValue(classroomId, out list))
+            {
+                foreach (var item in list)
+                {
+                    Console.WriteLine(item);
+                }
+                await _hub.Clients.Clients(list).SendAsync("SendDelete", deleted);
+            }
+        }
+        private async Task SendAdd(string classroomId, object send)
         {
             List<string>? list;
 
@@ -157,7 +197,7 @@ namespace InventoryApp.Controllers.Item
                 {
                     Console.WriteLine(item);
                 }
-                await _hub.Clients.Clients(list).SendAsync("SendReload");
+                await _hub.Clients.Clients(list).SendAsync("SendAdd", send);
             }
         }
 
@@ -179,7 +219,10 @@ namespace InventoryApp.Controllers.Item
                 };
 
                 await _itemProvider.Add(newItem);
-                await SendReload(itemCreateParameter.ClassroomId);
+
+                var returnItem = await _itemProvider.GetAllItems(newItem.ClassroomId);
+
+                await SendAdd(itemCreateParameter.ClassroomId, returnItem);
                 return Ok(new { message = "Item was added successfully!" });
             } catch(Exception ex) { 
                 return BadRequest(ex.Message);
@@ -190,7 +233,7 @@ namespace InventoryApp.Controllers.Item
         public async Task<IActionResult> GetAllItems(Guid id)
         {
             try
-            {
+            {   
                 var result = await _itemProvider.GetAllItems(id);
 
                 return Ok(result);
@@ -223,6 +266,8 @@ namespace InventoryApp.Controllers.Item
             {
                 var editItem = await _itemProvider.GetById(id) ??
                     throw new Exception("No such item");
+
+                var oldClassroomId = editItem.ClassroomId;
                 
                 var classroom = await _classroomProvider.FirstOrDefault(x => x.ClassroomName == parameter.ClassroomId);
 
@@ -239,6 +284,10 @@ namespace InventoryApp.Controllers.Item
 
                 await _itemProvider.Edit(editItem);
 
+                var returnItem = await _itemProvider.GetAllItems(oldClassroomId);
+                var returnItemNewClassroom = await _itemProvider.GetAllItems(editItem.ClassroomId); 
+
+                await SendUpdate(oldClassroomId.ToString(), editItem.ClassroomId.ToString(), returnItem, returnItemNewClassroom);
                 return Ok(new {message = "Item was edited successfully!"});
             } catch(Exception ex)
             {
@@ -258,7 +307,10 @@ namespace InventoryApp.Controllers.Item
                 
                 
                 await _itemProvider.Remove(item);
-                await SendReload(classroomId.ToString());
+
+                var returnItems = await _itemProvider.GetAllItems(item.ClassroomId);
+
+                await SendDelete(classroomId.ToString(), returnItems);
                 return Ok(new {message = "Item was deleted successfully!"});
             } catch(Exception ex)
             {
@@ -272,7 +324,7 @@ namespace InventoryApp.Controllers.Item
         {
             try
             { 
-                var result = await _itemProvider.Get(x => (Regex.IsMatch(x.Name, param) && x.ClassroomId.Equals(Guid.Parse(classroom))));
+                var result = await _itemProvider.GetAllFromClassroomByName(classroom, param);
 
                 return Ok(result);
             }
@@ -280,5 +332,22 @@ namespace InventoryApp.Controllers.Item
                 return BadRequest();
             }
         }
+
+        [HttpGet("searchbycategory/{classroom}/{category}")]
+        public async Task<IActionResult> SearchByCategory(string classroom, string category)
+        {
+            try
+            {
+                var result = await _itemProvider.GetAllFromClassroomByCategory(classroom, category);
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
     }
 }

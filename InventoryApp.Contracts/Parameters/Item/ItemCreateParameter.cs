@@ -12,7 +12,7 @@ namespace InventoryApp.Contracts.Parameters.Item
         public string IconUrl { get; set; }
         [MinLength(2)]
         public string Condition { get; set; }
-        [MinLength(2)]
+        [MinLength(2), MaxLength(250)]
         public string Description { get; set; }
         public string ClassroomId { get; set; }
         public string CategoryId { get; set; }

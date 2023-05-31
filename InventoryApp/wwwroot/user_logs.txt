@@ -8,3 +8,358 @@ Log Entry : 12:32:55 AM Sunday, May 28, 2023
   :
   :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/d9c964e5-829b-4fc1-a68c-0a72910c164e; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
 -------------------------------
+
+Log Entry : 3:50:46 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 3:51:01 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/64d7eb74-cfc6-49ba-91dc-b37e5b1fb7cc; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 3:51:23 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/b4eccad4-e74c-4b58-8b64-d637660f6e4f; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 3:52:19 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:36:35 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:37:51 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:40:09 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:42:55 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/3f130a60-21c1-470e-a5b7-bb1f5a3746a6; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:43:06 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/eb082f19-ab41-4c1f-a00a-fb3610d51ec7; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:43:27 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:45:02 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:47:37 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:52:25 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:57:57 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:59:01 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/a9bfc6ae-da9d-4058-8070-202814425398; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:59:23 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/accd0329-612a-46cd-b29a-a60502ccc329; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 4:59:49 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/accd0329-612a-46cd-b29a-a60502ccc329; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 5:02:03 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.issadilov@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 5:10:10 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/2fe6010b-ec30-4851-941a-8353f4f46c5c; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 5:12:48 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/1b0c1058-73a5-4f1d-85c0-6c30b88bd618; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 5:15:04 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/accd0329-612a-46cd-b29a-a60502ccc329; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 7:19:58 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/2fe6010b-ec30-4851-941a-8353f4f46c5c; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 7:20:29 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/2fe6010b-ec30-4851-941a-8353f4f46c5c; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 7:20:57 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/2fe6010b-ec30-4851-941a-8353f4f46c5c; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 7:21:11 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/1b0c1058-73a5-4f1d-85c0-6c30b88bd618; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 7:21:33 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/accd0329-612a-46cd-b29a-a60502ccc329; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 7:21:49 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/01c72ebf-a6ec-48dc-bda8-1754825e85ee; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 7:28:58 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 7:54:38 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/accd0329-612a-46cd-b29a-a60502ccc329; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:05:34 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/accd0329-612a-46cd-b29a-a60502ccc329; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:25:18 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/fromscanner; action: InventoryApp.Controllers.Item.ItemController.CreateFromScanner (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:25:37 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/fromscanner; action: InventoryApp.Controllers.Item.ItemController.CreateFromScanner (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:27:22 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/fromscanner; action: InventoryApp.Controllers.Item.ItemController.CreateFromScanner (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:29:56 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/fromscanner; action: InventoryApp.Controllers.Item.ItemController.CreateFromScanner (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:35:50 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/classroom/22676f19-ac9c-48ea-8ab1-6666d0f46024; action: InventoryApp.Controllers.Classrooms.ClassroomController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:35:55 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/classroom/b9716eff-48e1-4a13-92ca-fa9abd41d859; action: InventoryApp.Controllers.Classrooms.ClassroomController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:36:00 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/classroom/0ddc89f8-26e9-4fc5-b806-1551f5247de9; action: InventoryApp.Controllers.Classrooms.ClassroomController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:36:11 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/a18260d7-212c-4e08-b0f9-f3410a49fe5c; action: InventoryApp.Controllers.Category.CategoryController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:36:16 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/829bd1e7-f758-4441-8a05-027f1805b2d2; action: InventoryApp.Controllers.Category.CategoryController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:36:21 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/5dc8f2de-5635-4533-93e0-3517f989ca5e; action: InventoryApp.Controllers.Category.CategoryController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:37:03 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/classroom/; action: InventoryApp.Controllers.Classrooms.ClassroomController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:38:22 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/; action: InventoryApp.Controllers.Category.CategoryController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:38:33 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.BadRequestObjectResult; url: http://localhost:5297/api/category/; action: InventoryApp.Controllers.Category.CategoryController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:38:51 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/; action: InventoryApp.Controllers.Category.CategoryController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:39:28 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/f649c9bc-0584-41ea-bf5b-9e923680f862; action: InventoryApp.Controllers.Category.CategoryController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:39:39 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/526828cf-1577-4da1-a8e8-5c72aee996ba; action: InventoryApp.Controllers.Category.CategoryController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:40:12 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/; action: InventoryApp.Controllers.Category.CategoryController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:40:32 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/; action: InventoryApp.Controllers.Category.CategoryController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:40:51 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/category/; action: InventoryApp.Controllers.Category.CategoryController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:50:59 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:52:46 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/48109ba7-192f-4738-82c7-7170aad9e7be; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:53:06 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/48109ba7-192f-4738-82c7-7170aad9e7be; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:53:20 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/48109ba7-192f-4738-82c7-7170aad9e7be; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 8:53:59 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/48109ba7-192f-4738-82c7-7170aad9e7be; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:03:57 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:07:26 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/163202ef-bf37-4fc4-a805-4833ca0177f1; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:16:08 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/48109ba7-192f-4738-82c7-7170aad9e7be; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:39:28 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.BadRequestObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:39:38 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:48:52 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:49:17 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/248f6259-a4b0-451d-a6ac-7ba28e8fa343; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:50:58 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:51:19 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/094273e0-42ff-46ae-b211-2c9638081e8c; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 9:55:05 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/8a6943e4-3b0c-4952-b304-1eb589cf3af2; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 10:06:38 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/8a6943e4-3b0c-4952-b304-1eb589cf3af2; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 10:10:52 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/8a6943e4-3b0c-4952-b304-1eb589cf3af2; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 10:15:40 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/8a6943e4-3b0c-4952-b304-1eb589cf3af2; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 10:16:48 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/8a6943e4-3b0c-4952-b304-1eb589cf3af2; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
+
+Log Entry : 10:16:59 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/8a6943e4-3b0c-4952-b304-1eb589cf3af2; action: InventoryApp.Controllers.Item.ItemController.Delete (InventoryApp); 
+-------------------------------
+
+Log Entry : 10:19:05 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/; action: InventoryApp.Controllers.Item.ItemController.Create (InventoryApp); 
+-------------------------------
+
+Log Entry : 10:19:30 PM Sunday, May 28, 2023
+  :
+  :user: akezhan.2003@gmail.com; result: Microsoft.AspNetCore.Mvc.OkObjectResult; url: http://localhost:5297/api/item/b496de67-10c1-42b7-8dfe-0b9380dc412d; action: InventoryApp.Controllers.Item.ItemController.Edit (InventoryApp); 
+-------------------------------
